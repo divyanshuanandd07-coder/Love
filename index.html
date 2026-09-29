@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love Calculator ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      color: white;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 450px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      padding: 35px 25px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    }
+
+    h1 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      opacity: 0.9;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 12px;
+      background: #ff1744;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.03);
+      background: #e9143d;
+    }
+
+    #result {
+      margin-top: 25px;
+      font-size: 22px;
+      font-weight: bold;
+      line-height: 1.5;
+    }
+
+    .percentage {
+      font-size: 48px;
+      color: #fff;
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>❤️ Love Calculator</h1>
+    <p>Enter two names and discover their love compatibility!</p>
+
+    <input type="text" id="boyName" placeholder="Enter boy's name">
+    <input type="text" id="girlName" placeholder="Enter girl's name">
+
+    <button onclick="calculateLove()">Calculate Love 💕</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+
+    function calculateLove() {
+
+      const boy = document.getElementById("boyName").value.trim().toLowerCase();
+      const girl = document.getElementById("girlName").value.trim().toLowerCase();
+
+      if (boy === "" || girl === "") {
+        document.getElementById("result").innerHTML =
+          "Please enter both names ❤️";
+        return;
+      }
+
+      // Create a key that works in either order
+      const pair = [boy, girl].sort().join("+");
+
+      let result;
+
+      // SPECIAL RESULTS
+      const specialResults = {
+
+        "d+k": "not defined ❤️ (True Love)",
+
+        "d+m": "not defined ❤️ (True Love)",
+
+        "m+s": "100% 💯❤️",
+
+        "d+s": "100% 💯❤️",
+
+        "d+a": "Divyanshu has messy/curly hairs and he's rich and he has nice eyes. He's most probably a red flag 🚩 so stay away from him, girl 😭",
+
+        "d+d": "100% 💯❤️",
+
+        "k+m": "not defined ❤️ (True Love)",
+
+        "l+m": "100% 💯❤️",
+
+        "b+d": "100% 💯❤️"
+      };
+
+      // Check special pair first
+      if (specialResults[pair]) {
+
+        result = specialResults[pair];
+
+        document.getElementById("result").innerHTML =
+          `<div>${result}</div>`;
+
+        return;
+      }
+
+      // RANDOM RESULT FOR OTHER NAMES
+      const percentage = Math.floor(Math.random() * 101);
+
+      let message;
+
+      if (percentage <= 20) {
+        message = "💀 Very low compatibility!";
+      } 
+      else if (percentage <= 40) {
+        message = "😬 There might be some chemistry...";
+      } 
+      else if (percentage <= 60) {
+        message = "🙂 It's complicated!";
+      } 
+      else if (percentage <= 80) {
+        message = "💕 Pretty good match!";
+      } 
+      else if (percentage <= 95) {
+        message = "🔥 Strong chemistry!";
+      } 
+      else {
+        message = "💖 TRUE LOVE!";
+      }
+
+      document.getElementById("result").innerHTML = `
+        <div class="percentage">${percentage}%</div>
+        <div>${message}</div>
+      `;
+    }
+
+  </script>
+
+</body>
+</html>
